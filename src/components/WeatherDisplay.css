@@ -1,0 +1,80 @@
+.weather-display {
+  text-align: center;
+}
+.weather-display h2 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+.weather-display p {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.weather-display .weather-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 0px;
+}
+.weather-display .weather-button button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: rgb(146, 146, 146);
+  border: 1px solid rgb(146, 146, 146);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.weather-display button:hover{
+  background-color: rgb(45, 45, 45);
+  border: 1px solid rgb(45, 45, 45);
+  color: rgb(241, 239, 239);
+}
+
+.weather-display h3 {
+  font-size: 30px;
+  margin: 30px 0px;
+}
+.forecast {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.weather-display .forecast-day {
+  margin: 10px;
+  padding: 15px;
+  height: auto;
+  width: 200px;
+  box-shadow: 0px 0px 10px rgb(26, 26, 26);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weather-display .forecast-day p {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.weather-display .forecast-day .weather-icon {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 556px) {
+  .weather-display h2 {
+    font-size: 30px;
+    margin: 20px 0px;
+  }
+  .weather-display h3 {
+    font-size: 28px;
+    margin: 30px 0px;
+  }
+  .weather-display .forecast-day {
+    height: 130px;
+    width: 180px;
+  }
+  .weather-display .forecast-day p {
+    top: 20%;
+    font-size: 16px;
+  }
+}
