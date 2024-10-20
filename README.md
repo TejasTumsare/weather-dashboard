@@ -60,3 +60,8 @@ Once logged in, go to the API keys section of your account settings.
 Copy the provided API key.
 Configuring the API Key.
 
+## Usage
+-> Use the search bar to enter the name of a city.
+-> Click on the Show Weather button to view the current weather and forecast.
+-> Click the Add to Favorites button to save your favorite cities.
+-> Navigate to the Favorite Cities section to view and remove your saved cities.
