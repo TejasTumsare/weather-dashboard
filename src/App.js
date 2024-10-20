@@ -48,29 +48,47 @@ const App = () => {
     }
   };
 
-  const addFavorite = (city) => {
+  const addFavorite = async (city) => {
     if (!favorites.some((favorite) => favorite.city === city)) {
-      const newFavorites = [...favorites, { id: Date.now(), city }];
-      setFavorites(newFavorites);
+      const newFavorite = { id: Date.now(), city };
+
+      try {
+        await axios.post("http://localhost:5000/favorites", newFavorite);
+        setFavorites([...favorites, newFavorite]);
+      } catch (error) {
+        console.error("Error adding favorite city:", error);
+        alert("Unable to add favorite city. Please try again.");
+      }
     }
   };
 
-  const showWeather = async (city) => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=30d936cd83a90258057ff0e1cb7c160e`
-      );
-      const weatherData = response.data;
-      console.log(weatherData);
-      setWeatherData(weatherData);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-    }
-  };
+
   const removeFavorite = (id) => {
     const updatedFavorites = favorites.filter((favorite) => favorite.id !== id);
     setFavorites(updatedFavorites);
   };
+
+  
+  const showWeather = async (city) => {
+    try {
+      const API_KEY = "30d936cd83a90258057ff0e1cb7c160e";
+      const currentWeather = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+      );
+      const forecast = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`
+      );
+      const filteredForecast = forecast.data.list.filter((forecastItem) =>
+        forecastItem.dt_txt.includes("12:00:00")
+      );
+      setWeatherData(currentWeather.data);
+      setForecastData(filteredForecast.slice(0, 5));
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+  };
+
+  
 
   return (
     <main className="app">
@@ -81,9 +99,7 @@ const App = () => {
           addFavorite={addFavorite}
           unit={unit}
           toggleUnit={() => setUnit(unit === "metric" ? "imperial" : "metric")}
-          forecastData={forecastData}
-          
-        />
+          forecastData={forecastData}/>
         <Favorites
           favorites={favorites}
           showWeather={showWeather}

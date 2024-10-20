@@ -1,3 +1,16 @@
 {
-  "favorites": []
+  "favorites": [
+    {
+      "id": 1729438963822,
+      "city": "Mumbai"
+    },
+    {
+      "id": 1729439041245,
+      "city": "Mumbai"
+    },
+    {
+      "id": 1729439049474,
+      "city": "Pune"
+    }
+  ]
 }
