@@ -9,9 +9,10 @@ const App = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
   const [city, setCity] = useState(localStorage.getItem("lastCity") || "");
-  const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favorites")) || []);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
   const [unit, setUnit] = useState("metric");
-  
 
   useEffect(() => {
     console.log(`City state in App: ${city}`);
@@ -56,9 +57,11 @@ const App = () => {
 
   const showWeather = async (city) => {
     try {
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=30d936cd83a90258057ff0e1cb7c160e`);
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=30d936cd83a90258057ff0e1cb7c160e`
+      );
       const weatherData = response.data;
-      console.log(weatherData); 
+      console.log(weatherData);
       setWeatherData(weatherData);
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -72,21 +75,20 @@ const App = () => {
   return (
     <main className="app">
       <div className="dashboard">
-          <SearchCity setCity={setCity} />
-          <WeatherDisplay
-            weatherData={weatherData}
-              unit={unit}
-              toggleUnit={() =>
-                setUnit(unit === "metric" ? "imperial" : "metric")
-              }
-            forecastData={forecastData}
-            addFavorite={addFavorite}
-          />
-          <Favorites
-            favorites={favorites}
-            showWeather={showWeather}
-            removeFavorite={removeFavorite}
-          />
+        <SearchCity setCity={setCity} />
+        <WeatherDisplay
+          weatherData={weatherData}
+          addFavorite={addFavorite}
+          unit={unit}
+          toggleUnit={() => setUnit(unit === "metric" ? "imperial" : "metric")}
+          forecastData={forecastData}
+          
+        />
+        <Favorites
+          favorites={favorites}
+          showWeather={showWeather}
+          removeFavorite={removeFavorite}
+        />
       </div>
     </main>
   );
